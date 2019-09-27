@@ -14,8 +14,8 @@ class AccelerationSystem : IteratingSystem({
     override fun processEntity(entity: Entity, dt: Double) {
         val acceleration = entity[Acceleration]
         val velocity = entity[Velocity]
-        velocity.dx += acceleration.ddx
-        velocity.dy += acceleration.ddy
+        velocity.dx += acceleration.ddx * dt
+        velocity.dy += acceleration.ddy * dt
     }
 
 }

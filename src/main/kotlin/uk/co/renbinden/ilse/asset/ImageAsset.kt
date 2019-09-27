@@ -9,17 +9,14 @@ class ImageAsset(source: String) : Asset() {
     val image: HTMLImageElement = (document.createElement("img") as HTMLImageElement)
         .also { it.src = source }
 
-    private var loaded = false
+    override var isLoaded: Boolean = false
 
     init {
         image.onload = {
-            loaded = true
+            isLoaded = true
+            onLoad()
             true
         }
-    }
-
-    override fun isLoaded(): Boolean {
-        return loaded
     }
 
 }

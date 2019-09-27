@@ -6,6 +6,11 @@ import org.w3c.dom.Audio
 class SoundAsset(val source: String) : Asset() {
 
     private val audioInstances = mutableListOf<Audio>()
+    override val isLoaded: Boolean = true
+
+    init {
+        onLoad()
+    }
 
     fun play() {
         val stoppedAudios = audioInstances.filter { audio -> audio.paused || audio.currentTime <= 0 || audio.ended  }
@@ -15,10 +20,6 @@ class SoundAsset(val source: String) : Asset() {
             return
         }
         stoppedAudios.first().play()
-    }
-
-    override fun isLoaded(): Boolean {
-        return true
     }
 
 }

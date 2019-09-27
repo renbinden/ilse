@@ -9,13 +9,13 @@ import uk.co.renbinden.ilse.ecs.system.IteratingSystem
 class VelocitySystem : IteratingSystem({
         it.has(Position)
                 && it.has(Velocity)
-}, priority = 3) {
+}, priority = 4) {
 
     override fun processEntity(entity: Entity, dt: Double) {
         val velocity = entity[Velocity]
         val position = entity[Position]
-        position.x += velocity.dx
-        position.y += velocity.dy
+        position.x += velocity.dx * dt
+        position.y += velocity.dy * dt
     }
 
 }
