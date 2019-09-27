@@ -7,7 +7,7 @@ import kotlin.math.floor
 import kotlin.math.roundToInt
 
 
-class Animation(val asset: AnimationAsset, val frameDuration: Double) : Component() {
+class Animation(var asset: AnimationAsset, val frameDuration: Double) : Component {
 
     var t = 0.0
 

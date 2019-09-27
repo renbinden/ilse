@@ -11,7 +11,7 @@ class Velocity(
     dy: Double,
     var dxMax: Double? = null,
     var dyMax: Double? = null
-) : Component() {
+) : Component {
 
     var dx: Double = dx
         set(value) {

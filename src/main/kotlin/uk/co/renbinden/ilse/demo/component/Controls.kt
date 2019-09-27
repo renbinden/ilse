@@ -9,7 +9,7 @@ class Controls(
     var rightKey: Int,
     var upKey: Int,
     var downKey: Int
-) : Component() {
+) : Component {
 
     companion object: ComponentMapper<Controls>(Controls::class)
 

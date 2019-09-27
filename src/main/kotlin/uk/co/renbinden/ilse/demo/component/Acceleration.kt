@@ -10,7 +10,7 @@ class Acceleration(
     ddy: Double,
     var ddxMax: Double? = null,
     var ddyMax: Double? = null
-): Component() {
+): Component {
     var ddx: Double = ddx
         set(value) {
             val ddxMax = ddxMax
