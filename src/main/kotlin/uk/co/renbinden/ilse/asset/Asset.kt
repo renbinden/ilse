@@ -1,17 +1,15 @@
 package uk.co.renbinden.ilse.asset
 
+import uk.co.renbinden.ilse.asset.event.AssetLoadEvent
+import uk.co.renbinden.ilse.event.Events
+
 
 abstract class Asset {
 
-    private val loadListeners = mutableListOf<() -> Unit>()
-
     abstract val isLoaded: Boolean
-    fun addLoadListener(listener: () -> Unit) {
-        loadListeners.add(listener)
-    }
 
     protected fun onLoad() {
-        loadListeners.forEach { it.invoke() }
+        Events.onEvent(AssetLoadEvent(this))
     }
 
 }
