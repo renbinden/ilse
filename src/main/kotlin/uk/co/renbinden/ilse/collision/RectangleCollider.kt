@@ -1,5 +1,9 @@
 package uk.co.renbinden.ilse.collision
 
+import uk.co.renbinden.ilse.collision.event.HorizontalCollisionEvent
+import uk.co.renbinden.ilse.collision.event.VerticalCollisionEvent
+import uk.co.renbinden.ilse.event.Events
+
 
 class RectangleCollider(
     private var _x: Double,
@@ -96,6 +100,7 @@ class RectangleCollider(
                         x = other.x + other.width
                     }
                 }
+                Events.onEvent(HorizontalCollisionEvent(this@RectangleCollider, horizontalCollisions))
                 return true
             }
             return false
@@ -117,6 +122,7 @@ class RectangleCollider(
                         y = other.y + other.height
                     }
                 }
+                Events.onEvent(VerticalCollisionEvent(this@RectangleCollider, verticalCollisions))
                 return true
             }
             return false

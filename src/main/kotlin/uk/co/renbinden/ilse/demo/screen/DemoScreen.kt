@@ -10,7 +10,9 @@ import uk.co.renbinden.ilse.demo.level.loadLevel
 import uk.co.renbinden.ilse.demo.system.*
 import uk.co.renbinden.ilse.ecs.engine
 import uk.co.renbinden.ilse.ecs.entity.entity
-import uk.co.renbinden.ilse.input.Input
+import uk.co.renbinden.ilse.event.Events
+import uk.co.renbinden.ilse.input.event.KeyDownEvent
+import uk.co.renbinden.ilse.input.event.KeyPressEvent
 import kotlin.browser.document
 
 
@@ -77,7 +79,7 @@ class DemoScreen : Screen(
             }
         }
 
-        Input.keyPressListeners.add { event ->
+        Events.addListener(KeyPressEvent::class) { event ->
             when (event.keyCode) {
                 32 -> Assets.Sounds.coins.play()
                 96 -> {
@@ -86,7 +88,7 @@ class DemoScreen : Screen(
             }
         }
 
-        Input.keyDownListeners.add { event ->
+        Events.addListener(KeyDownEvent::class) { event ->
             when (event.keyCode) {
                 37 -> engine.entities
                     .firstOrNull { entity -> entity.has(Animation) && entity[Animation] == catWalkRight }
