@@ -22,16 +22,17 @@ class ControlSystem : IteratingSystem({
         val velocity = entity[Velocity]
         val collider = entity[Collider]
         velocity.dx = 0.0
-        if (Input.isKeyPressed(controls.upKey)
+        if ((Input.isKeyPressed(controls.upKey)
+                    || (Input.gamepads.isNotEmpty() && Input.gamepads[0].isButtonPressed(0)))
             && collider.collider.test(position.x, position.y + 1)
                 .collidesWith(engine.entities.filter { it.has(Collider) && it != entity }.map { it[Collider].collider })
         ) {
             velocity.dy -= 240.0
         }
-        if (Input.isKeyPressed(controls.leftKey)) {
+        if (Input.isKeyPressed(controls.leftKey) || (Input.gamepads.isNotEmpty() && (Input.gamepads[0].getAxisValue(0) < -0.3 || Input.gamepads[0].getAxisValue(6) < -0.3))) {
             velocity.dx -= 240.0
         }
-        if (Input.isKeyPressed(controls.rightKey)) {
+        if (Input.isKeyPressed(controls.rightKey) || (Input.gamepads.isNotEmpty() && (Input.gamepads[0].getAxisValue(0) > 0.3 || Input.gamepads[0].getAxisValue(6) > 0.3))) {
             velocity.dx += 240.0
         }
     }

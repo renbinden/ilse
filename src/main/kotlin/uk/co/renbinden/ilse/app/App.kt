@@ -3,6 +3,7 @@ package uk.co.renbinden.ilse.app
 import uk.co.renbinden.ilse.app.event.AppScreenChangeEvent
 import uk.co.renbinden.ilse.app.screen.Screen
 import uk.co.renbinden.ilse.event.Events
+import uk.co.renbinden.ilse.input.Input
 import kotlin.browser.window
 import kotlin.math.min
 
@@ -37,6 +38,7 @@ class App(screen: Screen? = null) {
     }
 
     private fun onTick(dt: Double) {
+        Input.pollGamepads()
         screen?.onTick(dt)
     }
 
