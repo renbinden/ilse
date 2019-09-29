@@ -3,51 +3,35 @@ package uk.co.renbinden.ilse.collision
 import uk.co.renbinden.ilse.collision.event.HorizontalCollisionEvent
 import uk.co.renbinden.ilse.collision.event.VerticalCollisionEvent
 import uk.co.renbinden.ilse.event.Events
+import kotlin.reflect.KMutableProperty0
+import kotlin.reflect.KProperty0
 
 
 class RectangleCollider(
-    private var _x: Double,
-    private var _y: Double,
-    private var _width: Double,
-    private var _height: Double
+    x: KMutableProperty0<Double>,
+    y: KMutableProperty0<Double>,
+    width: KProperty0<Double>,
+    height: KProperty0<Double>
 ) {
 
-    private var getX: () -> Double = { _x }
-    private var setX: (Double) -> Unit = { _x = it }
-    private var getY: () -> Double = { _y }
-    private var setY: (Double) -> Unit = { _y = it }
-    private var getWidth: () -> Double = { _width }
-    private var getHeight: () -> Double = { _height }
+    private var _x: KMutableProperty0<Double> = x
+    private var _y: KMutableProperty0<Double> = y
+    private var _width: KProperty0<Double> = width
+    private var _height: KProperty0<Double> = height
 
     var x: Double
-        get() = getX()
-        set(value) = setX(value)
+        get() = _x.get()
+        set(value) = _x.set(value)
 
     var y: Double
-        get() = getY()
-        set(value) = setY(value)
+        get() = _y.get()
+        set(value) = _y.set(value)
 
     val width: Double
-        get() = getWidth()
+        get() = _width.get()
 
     val height: Double
-        get() = getHeight()
-
-    constructor(
-        getX: () -> Double,
-        setX: (Double) -> Unit,
-        getY: () -> Double,
-        setY: (Double) -> Unit,
-        getWidth: () -> Double,
-        getHeight: () -> Double
-    ): this(0.0, 0.0, 0.0, 0.0) {
-        this.getX = getX
-        this.setX = setX
-        this.getY = getY
-        this.setY = setY
-        this.getWidth = getWidth
-        this.getHeight = getHeight
-    }
+        get() = _height.get()
 
     fun test(x: Double = this.x, y: Double = this.y): TestPosition {
         return TestPosition(x, y)
