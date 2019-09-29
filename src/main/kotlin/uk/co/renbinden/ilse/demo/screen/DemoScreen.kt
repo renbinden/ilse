@@ -12,7 +12,14 @@ import uk.co.renbinden.ilse.ecs.engine
 import uk.co.renbinden.ilse.ecs.entity.entity
 import uk.co.renbinden.ilse.event.Events
 import uk.co.renbinden.ilse.input.event.KeyDownEvent
-import uk.co.renbinden.ilse.input.event.KeyPressEvent
+import uk.co.renbinden.ilse.input.mapping.Keyboard.ARROW_LEFT
+import uk.co.renbinden.ilse.input.mapping.Keyboard.ARROW_RIGHT
+import uk.co.renbinden.ilse.input.mapping.Keyboard.ARROW_UP
+import uk.co.renbinden.ilse.input.mapping.Keyboard.BACKTICK
+import uk.co.renbinden.ilse.input.mapping.Keyboard.SPACE
+import uk.co.renbinden.ilse.input.mapping.XBoxOneGamepad.Axis.DPAD_HORIZONTAL_AXIS
+import uk.co.renbinden.ilse.input.mapping.XBoxOneGamepad.Axis.LEFT_STICK_HORIZONTAL_AXIS
+import uk.co.renbinden.ilse.input.mapping.XBoxOneGamepad.Button.A
 import kotlin.browser.document
 
 
@@ -31,9 +38,6 @@ class DemoScreen : Screen(
     val ctx = canvas.getContext("2d") as CanvasRenderingContext2D
 
     var debug = false
-
-    val catWalkLeft = Animation(Assets.Animations.catWalkLeft, 0.5)
-    val catWalkRight = Animation(Assets.Animations.catWalkRight, 0.5)
 
     init {
         loadLevel(Assets.Maps.level1) { obj, x, y ->
@@ -65,13 +69,17 @@ class DemoScreen : Screen(
                             { get(Dimensions).width },
                             { get(Dimensions).height }
                         )))
-                        add(catWalkRight)
+                        add(Animation(Assets.Animations.catWalkRight, 0.5))
                         add(
                             Controls(
-                                leftKey = 37,
-                                rightKey = 39,
-                                upKey = 38,
-                                downKey = 40
+                                leftKey = ARROW_LEFT,
+                                rightKey = ARROW_RIGHT,
+                                jumpKey = ARROW_UP,
+                                gamepadHorizontalAxes = arrayOf(
+                                    LEFT_STICK_HORIZONTAL_AXIS,
+                                    DPAD_HORIZONTAL_AXIS
+                                ),
+                                gamepadJumpButton = A
                             )
                         )
                     })
@@ -79,29 +87,12 @@ class DemoScreen : Screen(
             }
         }
 
-        Events.addListener(KeyPressEvent::class) { event ->
-            when (event.keyCode) {
-                32 -> Assets.Sounds.coins.play()
-                96 -> {
-                    debug = !debug
-                }
-            }
-        }
-
         Events.addListener(KeyDownEvent::class) { event ->
             when (event.keyCode) {
-                37 -> engine.entities
-                    .firstOrNull { entity -> entity.has(Animation) && entity[Animation] == catWalkRight }
-                    ?.let { entity ->
-                        entity.remove(catWalkRight)
-                        entity.add(catWalkLeft)
-                    }
-                39 -> engine.entities
-                    .firstOrNull { entity -> entity.has(Animation) && entity[Animation] == catWalkLeft }
-                    ?.let { entity ->
-                        entity.remove(catWalkLeft)
-                        entity.add(catWalkRight)
-                    }
+                SPACE -> Assets.Sounds.coins.play()
+                BACKTICK -> {
+                    debug = !debug
+                }
             }
         }
     }
