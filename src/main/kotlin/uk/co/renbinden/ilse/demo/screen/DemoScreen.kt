@@ -48,10 +48,10 @@ class DemoScreen : Screen(
                         add(Dimensions(32.0, 32.0))
                         add(Image(Assets.Images.block))
                         add(Collider(RectangleCollider(
-                            get(Position).x,
-                            get(Position).y,
-                            get(Dimensions).width,
-                            get(Dimensions).height
+                            get(Position)::x,
+                            get(Position)::y,
+                            get(Dimensions)::width,
+                            get(Dimensions)::height
                         )))
                     })
                 }
@@ -62,12 +62,10 @@ class DemoScreen : Screen(
                         add(Acceleration(0.0, 320.0, 0.0, 32.0))
                         add(Dimensions(32.0, 32.0))
                         add(Collider(RectangleCollider(
-                            { get(Position).x },
-                            { get(Position).x = it },
-                            { get(Position).y },
-                            { get(Position).y = it },
-                            { get(Dimensions).width },
-                            { get(Dimensions).height }
+                            get(Position)::x,
+                            get(Position)::y,
+                            get(Dimensions)::width,
+                            get(Dimensions)::height
                         )))
                         add(Animation(Assets.Animations.catWalkRight, 0.5))
                         add(
