@@ -23,6 +23,18 @@ class Entity {
         Events.onEvent(ComponentRemovedFromEntityEvent(component, this))
     }
 
+    fun remove(type: KClass<out Component>) {
+        val component = get(type)
+        components.remove(type)
+        Events.onEvent(ComponentRemovedFromEntityEvent(component, this))
+    }
+
+    fun remove(mapper: ComponentMapper<out Component>) {
+        val component = get(mapper)
+        components.remove(mapper.type)
+        Events.onEvent(ComponentRemovedFromEntityEvent(component, this))
+    }
+
     fun <T: Component> has(type: KClass<T>): Boolean {
         return components.containsKey(type)
     }

@@ -27,10 +27,6 @@ object Input {
             Events.onEvent(KeyUpEvent(event))
         }
 
-        window.onkeypress = { event ->
-            Events.onEvent(KeyPressEvent(event))
-        }
-
         window.onmousemove = { event ->
             mouseX = event.pageX
             mouseY = event.pageY
