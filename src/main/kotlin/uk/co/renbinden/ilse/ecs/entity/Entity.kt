@@ -3,7 +3,10 @@ package uk.co.renbinden.ilse.ecs.entity
 import uk.co.renbinden.ilse.ecs.ECSMarker
 import uk.co.renbinden.ilse.ecs.component.Component
 import uk.co.renbinden.ilse.ecs.component.ComponentMapper
+import uk.co.renbinden.ilse.ecs.event.ComponentAddedToEntityEvent
+import uk.co.renbinden.ilse.ecs.event.ComponentRemovedFromEntityEvent
 import uk.co.renbinden.ilse.ecs.exception.EntityComponentMissingException
+import uk.co.renbinden.ilse.event.Events
 import kotlin.reflect.KClass
 
 @ECSMarker
@@ -12,10 +15,24 @@ class Entity {
 
     fun add(component: Component) {
         components[component::class] = component
+        Events.onEvent(ComponentAddedToEntityEvent(component, this))
     }
 
     fun remove(component: Component) {
         components.remove(component::class)
+        Events.onEvent(ComponentRemovedFromEntityEvent(component, this))
+    }
+
+    fun remove(type: KClass<out Component>) {
+        val component = get(type)
+        components.remove(type)
+        Events.onEvent(ComponentRemovedFromEntityEvent(component, this))
+    }
+
+    fun remove(mapper: ComponentMapper<out Component>) {
+        val component = get(mapper)
+        components.remove(mapper.type)
+        Events.onEvent(ComponentRemovedFromEntityEvent(component, this))
     }
 
     fun <T: Component> has(type: KClass<T>): Boolean {

@@ -14,20 +14,17 @@ class AnimationAsset(val source: String, val frameWidth: Int, val frameHeight: I
     private var rows by Delegates.notNull<Int>()
     private var cols by Delegates.notNull<Int>()
     var frames by Delegates.notNull<Int>()
-    private var loaded = false
+    override var isLoaded: Boolean = false
 
     init {
         image.onload = {
             rows = image.height / frameHeight
             cols = image.width / frameWidth
             frames = rows * cols
-            loaded = true
+            isLoaded = true
+            onLoad()
             true
         }
-    }
-
-    override fun isLoaded(): Boolean {
-        return loaded
     }
 
     fun drawFrame(index: Int, canvas: CanvasRenderingContext2D, x: Double, y: Double) {

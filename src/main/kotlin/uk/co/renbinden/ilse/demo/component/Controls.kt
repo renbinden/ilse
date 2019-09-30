@@ -7,9 +7,10 @@ import uk.co.renbinden.ilse.ecs.component.ComponentMapper
 class Controls(
     var leftKey: Int,
     var rightKey: Int,
-    var upKey: Int,
-    var downKey: Int
-) : Component() {
+    var jumpKey: Int,
+    var gamepadHorizontalAxes: Array<Int>,
+    var gamepadJumpButton: Int
+) : Component {
 
     companion object: ComponentMapper<Controls>(Controls::class)
 

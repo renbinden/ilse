@@ -1,11 +1,20 @@
 package uk.co.renbinden.ilse.app
 
+import uk.co.renbinden.ilse.app.event.AppScreenChangeEvent
 import uk.co.renbinden.ilse.app.screen.Screen
+import uk.co.renbinden.ilse.event.Events
+import uk.co.renbinden.ilse.input.Input
 import kotlin.browser.window
 import kotlin.math.min
 
 
-class App(var screen: Screen? = null) {
+class App(screen: Screen? = null) {
+
+    var screen: Screen? = screen
+        set(value) {
+            Events.onEvent(AppScreenChangeEvent(this, field, value))
+            field = value
+        }
 
     var now = window.performance.now()
     var dt = 0.0
@@ -29,6 +38,7 @@ class App(var screen: Screen? = null) {
     }
 
     private fun onTick(dt: Double) {
+        Input.pollGamepads()
         screen?.onTick(dt)
     }
 

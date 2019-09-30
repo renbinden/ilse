@@ -7,7 +7,7 @@ import uk.co.renbinden.ilse.ecs.component.ComponentMapper
 class Dimensions(
     var width: Double,
     var height: Double
-) : Component() {
+) : Component {
 
     companion object: ComponentMapper<Dimensions>(Dimensions::class)
 

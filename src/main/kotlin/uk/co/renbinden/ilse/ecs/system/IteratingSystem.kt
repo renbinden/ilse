@@ -13,6 +13,6 @@ abstract class IteratingSystem(
         engine.entities.filter(filter).forEach { entity -> processEntity(entity, dt) }
     }
 
-    open fun processEntity(entity: Entity, dt: Double) {}
+    abstract fun processEntity(entity: Entity, dt: Double)
 
 }

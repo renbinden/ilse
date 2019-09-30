@@ -11,7 +11,7 @@ class Position(
     var xMax: Double? = null,
     var yMin: Double? = null,
     var yMax: Double? = null
-) : Component() {
+) : Component {
 
     var x: Double = x
         set(value) {
