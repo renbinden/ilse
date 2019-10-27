@@ -17,7 +17,7 @@ dependencies {
 
 kotlin.target.browser { }
 
-val repoPassword = file("$rootDir/repo_password.txt").readLines()[0]
+val repoPassword = file("$projectDir/repo_password.txt").readLines()[0]
 
 tasks {
     "uploadArchives"(Upload::class) {
