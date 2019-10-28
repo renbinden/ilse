@@ -4,7 +4,7 @@ plugins {
 }
 
 group = "uk.co.renbinden"
-version = "1.1.0"
+version = "1.2.0"
 
 repositories {
     mavenCentral()
@@ -17,7 +17,7 @@ dependencies {
 
 kotlin.target.browser { }
 
-val repoPassword = file("$rootDir/repo_password.txt").readLines()[0]
+val repoPassword = file("$projectDir/repo_password.txt").readLines()[0]
 
 tasks {
     "uploadArchives"(Upload::class) {
