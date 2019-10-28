@@ -1,15 +1,15 @@
 package uk.co.renbinden.ilse.tiled
 
 
-abstract class Object(
+open class Object(
     val id: Int?,
     val name: String,
     val type: String,
     val x: Double,
     val y: Double,
-    width: Int? = null,
-    height: Int? = null,
-    rotation: Int? = null,
+    width: Double? = null,
+    height: Double? = null,
+    rotation: Double? = null,
     val gid: Int?,
     visible: Boolean? = null,
     val template: String?,
@@ -28,9 +28,9 @@ abstract class Object(
             type: String,
             x: Double,
             y: Double,
-            width: Int? = null,
-            height: Int? = null,
-            rotation: Int? = null,
+            width: Double? = null,
+            height: Double? = null,
+            rotation: Double? = null,
             gid: Int?,
             visible: Boolean? = null,
             template: String?,
@@ -61,7 +61,7 @@ abstract class Object(
                 image != null -> ImageObject(
                     id, name, type, x, y, width, height, rotation, gid, visible, template, properties, image
                 )
-                else -> PointObject(
+                else -> Object(
                     id, name, type, x, y, width, height, rotation, gid, visible, template, properties
                 )
             }
