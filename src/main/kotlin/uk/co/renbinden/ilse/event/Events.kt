@@ -13,6 +13,18 @@ object Events {
         listeners[event] = eventListeners as MutableList<(Event) -> Unit>
     }
 
+    fun <E: Event> removeListener(event: KClass<E>, listener: (E) -> Unit) {
+        val eventListeners = listeners[event] as? MutableList<(E) -> Unit>
+        if (eventListeners != null) {
+            eventListeners.remove(listener)
+            if (eventListeners.isEmpty()) {
+                listeners.remove(event)
+            } else {
+                listeners[event] = eventListeners as MutableList<(Event) -> Unit>
+            }
+        }
+    }
+
     fun onEvent(event: Event) {
         listeners[event::class]?.forEach { listener -> listener(event) }
     }

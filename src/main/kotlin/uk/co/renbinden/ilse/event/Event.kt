@@ -1,5 +1,4 @@
 package uk.co.renbinden.ilse.event
 
 
-interface Event {
-}
+interface Event
