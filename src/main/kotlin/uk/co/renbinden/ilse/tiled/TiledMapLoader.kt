@@ -238,7 +238,7 @@ object TiledMapLoader {
         defaultOffsetY: Int = 0
     ): Layer {
         return Layer(
-            element.getAttribute("id")?.toInt() ?: throw TiledMapParseException("Failed to parse layer: id not present"),
+            element.getAttribute("id")?.toInt(),
             element.getAttribute("name") ?: throw TiledMapParseException("Failed to parse layer: name not present"),
             element.getAttribute("width")?.toInt() ?: throw TiledMapParseException("Failed to parse layer: width not present"),
             element.getAttribute("height")?.toInt() ?: throw TiledMapParseException("Failed to parse layer: height not present"),
@@ -328,7 +328,7 @@ object TiledMapLoader {
         defaultOffsetY: Int = 0
     ): ObjectGroup {
         return ObjectGroup(
-            element.getAttribute("id")?.toInt() ?: throw TiledMapParseException("Failed to parse object group: id not present"),
+            element.getAttribute("id")?.toInt(),
             element.getAttribute("name") ?: throw TiledMapParseException("Failed to parse object group: name not present"),
             Color.fromARGBHexCode(element.getAttribute("color") ?: ""),
             element.getAttribute("opacity")?.toDouble() ?: defaultOpacity,
