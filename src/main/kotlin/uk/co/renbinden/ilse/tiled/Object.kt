@@ -16,9 +16,9 @@ open class Object(
     val properties: Properties
 ) {
 
-    val width = width ?: 0
-    val height = height ?: 0
-    val rotation = rotation ?: 0
+    val width = width ?: 0.0
+    val height = height ?: 0.0
+    val rotation = rotation ?: 0.0
     val visible = visible ?: true
 
     companion object {
