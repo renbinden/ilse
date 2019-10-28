@@ -6,5 +6,5 @@ class Chunk(
     val y: Int,
     val width: Int,
     val height: Int,
-    val tiles: List<TileInstance>
+    val tiles: List<TileInstance?>
 )

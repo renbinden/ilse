@@ -253,7 +253,7 @@ object TiledMapLoader {
 
     @ExperimentalStdlibApi
     private fun parseData(element: Element): Data {
-        var tiles: List<TileInstance> = emptyList()
+        var tiles: List<TileInstance?> = emptyList()
         var chunks: List<Chunk> = emptyList()
         val encoding = element.getAttribute("encoding")
         val compression = element.getAttribute("compression")
@@ -262,16 +262,10 @@ object TiledMapLoader {
             chunks = element.getElementsByTagName("chunk").asList().map { parseChunk(it, encoding, compression) }
         } else if (encoding == "csv") {
             tiles = element.textContent
-                ?.drop(1)
-                ?.split("\n")
-                ?.map { line ->
-                    line.trim()
-                        .split(",")
-                        .dropLast(1)
-                        .map { id -> id.trim().toInt() }
-                }
-                ?.flatMap { ids ->
-                    ids.map { id -> TileInstance(id) }
+                ?.split(",")
+                ?.map { idString ->
+                    val id = idString.trim().toInt()
+                    if (id == 0) null else TileInstance(id)
                 }
                 ?: emptyList()
         } else if (encoding == "base64") {
@@ -290,13 +284,16 @@ object TiledMapLoader {
     }
 
     private fun parseChunk(element: Element, encoding: String?, compression: String?): Chunk {
-        var tiles: List<TileInstance> = emptyList()
+        var tiles: List<TileInstance?> = emptyList()
         if (encoding == null && compression == null) {
             tiles = element.getElementsByTagName("tile").asList().map(::parseTileInstance)
         } else if (encoding == "csv") {
             tiles = element.textContent
                 ?.split(",")
-                ?.map { TileInstance(it.trim().toInt()) }
+                ?.map { idString ->
+                    val id = idString.trim().toInt()
+                    if (id == 0) null else TileInstance(id)
+                }
                 ?: emptyList()
         }
         return Chunk(
