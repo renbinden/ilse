@@ -16,7 +16,7 @@ class Engine {
 
     fun add(system: System) {
         system.engine = this
-        systems.add(abs(systems.binarySearchBy(system.priority, selector = System::priority)) - 1, system)
+        systems.add(abs(systems.binarySearchBy(system.priority, selector = System::priority) + 1), system)
         Events.onEvent(SystemAddedToEngineEvent(system, this))
     }
 
