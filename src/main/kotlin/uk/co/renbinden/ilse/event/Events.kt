@@ -13,6 +13,10 @@ object Events {
         listeners[event] = eventListeners as MutableList<(Event) -> Unit>
     }
 
+    fun <E: Event> addListener(mapper: EventMapper<E>, listener: (E) -> Unit) {
+        addListener(mapper.type, listener)
+    }
+
     fun <E: Event> removeListener(event: KClass<E>, listener: (E) -> Unit) {
         val eventListeners = listeners[event] as? MutableList<(E) -> Unit>
         if (eventListeners != null) {
@@ -23,6 +27,10 @@ object Events {
                 listeners[event] = eventListeners as MutableList<(Event) -> Unit>
             }
         }
+    }
+
+    fun <E: Event> removeListener(mapper: EventMapper<E>, listener: (E) -> Unit) {
+        removeListener(mapper.type, listener)
     }
 
     fun onEvent(event: Event) {
