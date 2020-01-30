@@ -1,5 +1,6 @@
 package uk.co.renbinden.ilse.collision
 
+import uk.co.renbinden.ilse.collision.event.CollisionEvent
 import uk.co.renbinden.ilse.collision.event.HorizontalCollisionEvent
 import uk.co.renbinden.ilse.collision.event.VerticalCollisionEvent
 import uk.co.renbinden.ilse.event.Events
@@ -85,6 +86,7 @@ class RectangleCollider(
                     }
                 }
                 Events.onEvent(HorizontalCollisionEvent(this@RectangleCollider, horizontalCollisions))
+                Events.onEvent(CollisionEvent(this@RectangleCollider, horizontalCollisions))
                 return true
             }
             return false
@@ -107,6 +109,7 @@ class RectangleCollider(
                     }
                 }
                 Events.onEvent(VerticalCollisionEvent(this@RectangleCollider, verticalCollisions))
+                Events.onEvent(CollisionEvent(this@RectangleCollider, verticalCollisions))
                 return true
             }
             return false
