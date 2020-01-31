@@ -5,9 +5,12 @@ import uk.co.renbinden.ilse.ecs.event.EntityAddedToEngineEvent
 import uk.co.renbinden.ilse.ecs.event.EntityRemovedFromEngineEvent
 import uk.co.renbinden.ilse.ecs.event.SystemAddedToEngineEvent
 import uk.co.renbinden.ilse.ecs.event.SystemRemovedFromEngineEvent
+import uk.co.renbinden.ilse.ecs.exception.EngineSystemMissingException
 import uk.co.renbinden.ilse.ecs.system.System
+import uk.co.renbinden.ilse.ecs.system.SystemMapper
 import uk.co.renbinden.ilse.event.Events
 import kotlin.math.abs
+import kotlin.reflect.KClass
 
 @ECSMarker
 class Engine {
@@ -23,6 +26,23 @@ class Engine {
     fun remove(system: System) {
         systems.remove(system)
         Events.onEvent(SystemRemovedFromEngineEvent(system, this))
+    }
+
+    fun has(type: KClass<out System>): Boolean {
+        return systems.any { it::class == type }
+    }
+
+    fun has(mapper: SystemMapper<out System>): Boolean {
+        return mapper.has(this)
+    }
+
+    operator fun <T: System> get(type: KClass<T>): T {
+        if (!has(type)) throw EngineSystemMissingException(type)
+        return systems.first { it::class == type } as T
+    }
+
+    operator fun <T: System> get(mapper: SystemMapper<T>): T {
+        return mapper[this]
     }
 
     fun add(entity: Entity) {

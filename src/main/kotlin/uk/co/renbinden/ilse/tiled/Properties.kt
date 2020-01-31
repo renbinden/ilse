@@ -9,4 +9,8 @@ class Properties(
     constructor(properties: Iterable<Properties>): this(properties.flatMap(Properties::properties))
     constructor(vararg properties: Property<Any>): this(properties.toList())
 
+    operator fun get(name: String): Any? {
+        return properties.firstOrNull { it.name == name }?.value
+    }
+
 }
