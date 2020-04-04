@@ -9,15 +9,26 @@ class Color(
 ) {
 
     fun toRGBAHexCode(): String {
-        return "#${red.toString(16)}${green.toString(16)}${blue.toString(16)}${alpha.toString(16)}"
+        return "#" +
+                red.toString(16).padStart(2, '0') +
+                green.toString(16).padStart(2, '0') +
+                blue.toString(16).padStart(2, '0') +
+                alpha.toString(16).padStart(2, '0')
     }
 
     fun toRGBHexCode(): String {
-        return "#${red.toString(16)}${green.toString(16)}${blue.toString(16)}"
+        return "#" +
+                red.toString(16).padStart(2, '0') +
+                green.toString(16).padStart(2, '0') +
+                blue.toString(16).padStart(2, '0')
     }
 
     fun toARGBHexCode(): String {
-        return "#${alpha.toString(16)}${red.toString(16)}${green.toString(16)}${blue.toString(16)}"
+        return "#" +
+                alpha.toString(16).padStart(2, '0') +
+                red.toString(16).padStart(2, '0') +
+                green.toString(16).padStart(2, '0') +
+                blue.toString(16).padStart(2, '0')
     }
 
     companion object {

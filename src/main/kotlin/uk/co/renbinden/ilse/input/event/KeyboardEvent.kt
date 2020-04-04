@@ -18,4 +18,16 @@ abstract class KeyboardEvent(private val keyboardEvent: org.w3c.dom.events.Keybo
     val keyCode = keyboardEvent.keyCode
     val which = keyboardEvent.which
 
+    fun preventDefault() {
+        keyboardEvent.preventDefault()
+    }
+
+    fun stopPropagation() {
+        keyboardEvent.stopPropagation()
+    }
+
+    fun stopImmediatePropagation() {
+        keyboardEvent.stopImmediatePropagation()
+    }
+
 }
