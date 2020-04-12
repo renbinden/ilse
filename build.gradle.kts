@@ -1,10 +1,10 @@
 plugins {
-    id("org.jetbrains.kotlin.js") version "1.3.61"
+    kotlin("js") version "1.3.71"
     maven
 }
 
 group = "uk.co.renbinden"
-version = "1.3.1"
+version = "1.4.0"
 
 repositories {
     mavenCentral()

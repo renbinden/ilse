@@ -1,13 +1,15 @@
 package uk.co.renbinden.ilse.asset
 
+import org.w3c.dom.CanvasImageSource
 import org.w3c.dom.HTMLImageElement
 import kotlin.browser.document
 
 
-class ImageAsset(source: String) : Asset() {
+class ImageAsset(val image: HTMLImageElement) : Asset(), CanvasImageSource by image {
 
-    val image: HTMLImageElement = (document.createElement("img") as HTMLImageElement)
-        .also { it.src = source }
+    constructor(source: String): this(
+        (document.createElement("img") as HTMLImageElement).also { it.src = source }
+    )
 
     override var isLoaded: Boolean = false
 
