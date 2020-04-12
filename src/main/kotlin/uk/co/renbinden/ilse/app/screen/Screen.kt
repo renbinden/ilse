@@ -9,6 +9,6 @@ abstract class Screen(val engine: Engine) {
         engine.onTick(dt)
     }
 
-    abstract fun onRender(dt: Double)
+    abstract fun onRender()
 
 }

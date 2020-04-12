@@ -23,8 +23,8 @@ open class ParticleEffect(var life: Double) {
         life -= dt
     }
 
-    fun onRender(dt: Double) {
-        particles.forEach { particle -> particle.onRender(dt) }
+    fun onRender() {
+        particles.forEach { particle -> particle.onRender() }
     }
 
     fun emitter(
