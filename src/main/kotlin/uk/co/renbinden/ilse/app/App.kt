@@ -32,7 +32,7 @@ class App(screen: Screen? = null) {
             dt -= step
             onTick(step)
         }
-        onRender(dt)
+        onRender()
         last = now
         window.requestAnimationFrame { onFrame() }
     }
@@ -42,8 +42,8 @@ class App(screen: Screen? = null) {
         screen?.onTick(dt)
     }
 
-    private fun onRender(dt: Double) {
-        screen?.onRender(dt)
+    private fun onRender() {
+        screen?.onRender()
     }
 
 }
