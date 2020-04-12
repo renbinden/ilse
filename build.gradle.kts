@@ -1,5 +1,5 @@
 plugins {
-    id("org.jetbrains.kotlin.js") version "1.3.61"
+    kotlin("js") version "1.3.71"
     maven
 }
 
