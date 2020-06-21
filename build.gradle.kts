@@ -4,7 +4,7 @@ plugins {
 }
 
 group = "uk.co.renbinden"
-version = "1.4.2-SNAPSHOT"
+version = "1.4.2"
 
 repositories {
     mavenCentral()
