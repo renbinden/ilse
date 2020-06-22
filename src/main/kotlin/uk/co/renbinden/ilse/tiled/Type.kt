@@ -60,6 +60,7 @@ interface Type<T> {
                 "BOOL" -> BOOL
                 "COLOR" -> COLOR
                 "FILE" -> FILE
+                "OBJECT" -> throw UnsupportedOperationException("not implemented")
                 else -> throw IllegalArgumentException()
             }
         }
