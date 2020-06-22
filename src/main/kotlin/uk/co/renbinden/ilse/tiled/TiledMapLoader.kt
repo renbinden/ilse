@@ -70,7 +70,7 @@ object TiledMapLoader {
     }
 
     private fun parseProperties(element: Element): Properties {
-        return Properties(element.getElementsByTagName("property").asList().map(::parseProperty))
+        return Properties(element.getElementsByTagName("property").asList().map(::parseProperty).toTypedArray())
     }
 
     private fun parseProperty(element: Element): Property<Any> {
