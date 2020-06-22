@@ -75,7 +75,7 @@ object TiledMapLoader {
 
     private fun parseProperty(element: Element): Property<Any> {
         val name = element.getAttribute("name") ?: ""
-        val type = Type.valueOf(element.getAttribute("type") ?: "string")
+        val type = Type.valueOf((element.getAttribute("type") ?: "string").toUpperCase())
         val value = type.coerce(element.getAttribute("value") ?: "")
         return Property(name, type, value)
     }
