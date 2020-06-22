@@ -24,4 +24,16 @@ abstract class MouseEvent(private val mouseEvent: org.w3c.dom.events.MouseEvent)
     val relatedTarget: EventTarget? = mouseEvent.relatedTarget
     fun getModifierState(keyArg: String): Boolean = mouseEvent.getModifierState(keyArg)
 
+    fun preventDefault() {
+        mouseEvent.preventDefault()
+    }
+
+    fun stopPropagation() {
+        mouseEvent.stopPropagation()
+    }
+
+    fun stopImmediatePropagation() {
+        mouseEvent.stopImmediatePropagation()
+    }
+
 }
